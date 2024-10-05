@@ -1,0 +1,43 @@
+---
+title: "Precio de la vivienda en Boston"
+author: "autor1, autor2, autor3."
+date: "Fecha"
+output: ioslides_presentation
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE
+)
+```
+
+
+## 
+
+Acá debe ir el contenido de la primera diapositiva. Si no desea colocar título no escriban algo después de los dos númerales ##
+
+Cada que coloquen ## se abre una diapositiva nueva. 
+
+Pueden ocultar el código (por ejemplo, la ruta del directorio de trabajo) y salidas (por ejemplo, la visualización de la base de datos) que no son indispensables para hacer la sustentación. No oculten salidas importantes (por ejemplo, el modelo).
+
+Les recomiendo ver el siguiente video: https://www.youtube.com/watch?v=KIZI2U2UNog
+
+ 
+ 
+## Titulo 1. 
+
+```{r}
+# Espacio para escribir código
+
+```
+
+## Referencias.
+ 
+Por favor colocar las referencias en normas APA. 
+
++ Referencia 1
++ Referencia 2.
+ 
