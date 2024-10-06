@@ -1,12 +1,21 @@
 ---
 title: "Precio de la vivienda en Boston"
-author: "autor1, autor2, autor3."
-date: "Fecha"
+author: 
+- David Moreno, Santiago Amado, Yodid Cardenas
+- Maestría en Ciencia de Datos
+- Modelos Estadísticos Aplicados
+
+date: "6/Oct/2024"
 output: ioslides_presentation
 ---
-
-
 ```{r setup, include=FALSE}
+# URL actualizada del archivo en GitHub
+url <- "https://raw.githubusercontent.com/jamadom07683/ModelosEstadisticas_Fase3/main/BostonHousing.xlsx"
+
+```
+
+
+```{r setup2, include=FALSE}
 knitr::opts_chunk$set(
 	echo = FALSE,
 	message = FALSE,
