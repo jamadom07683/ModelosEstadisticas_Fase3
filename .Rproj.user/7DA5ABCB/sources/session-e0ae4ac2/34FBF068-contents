@@ -2,7 +2,9 @@
 title: "Precio de la vivienda en Boston"
 author: 
 - David Moreno, Santiago Amado, Yodid Cardenas
+
 - Maestría en Ciencia de Datos
+
 - Modelos Estadísticos Aplicados
 
 date: "6/Oct/2024"
@@ -10,8 +12,16 @@ output: ioslides_presentation
 ---
 ```{r setup, include=FALSE}
 library(knitr)
+library(dplyr)
+library(readxl)
 # URL actualizada del archivo en GitHub
 url <- "https://raw.githubusercontent.com/jamadom07683/ModelosEstadisticas_Fase3/main/BostonHousing.xlsx"
+# Crear un archivo temporal donde descargar el Excel
+temp_file <- tempfile(fileext = ".xlsx")
+download.file(url, temp_file, mode = "wb")
+
+# Leer datos segunda hoja
+boston_data <- read_excel(temp_file, sheet = 2)
 
 ```
 
@@ -56,9 +66,20 @@ variable_descriptions <- data.frame(
 kable(variable_descriptions, col.names = c("Variable", "Descripción"))
 ```
 
+```{r, include=FALSE}
+
+```
+## Análisis de Vivienda
+
+### Resumen de Estadísticas Descriptivas
+
+```{r, echo=FALSE}
+
+
+```
 ## Referencias.
  
-Por favor colocar las referencias en normas APA. 
+Por favor colocar las referencias en normas APA.  
 
 + Referencia 1
 + Referencia 2.
