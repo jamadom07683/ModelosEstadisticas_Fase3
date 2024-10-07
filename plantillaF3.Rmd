@@ -14,6 +14,8 @@ output: ioslides_presentation
 library(knitr)
 library(dplyr)
 library(readxl)
+library(kableExtra)
+library(ggplot2)
 # URL actualizada del archivo en GitHub
 url <- "https://raw.githubusercontent.com/jamadom07683/ModelosEstadisticas_Fase3/main/BostonHousing.xlsx"
 # Crear un archivo temporal donde descargar el Excel
@@ -62,21 +64,71 @@ variable_descriptions <- data.frame(
                   "Valor medio superior o igual a 30 mil dólares (1 si es superior, 0 en otro caso)")
 )
 
-# Mostrar la tabla bien formateada
-kable(variable_descriptions, col.names = c("Variable", "Descripción"))
+# Mostrar la tabla con ajuste de ancho y colores
+kable(variable_descriptions, col.names = c("Variable", "Descripción")) %>%
+  kable_styling(full_width = TRUE, font_size = 11) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#0073C2") %>% # Encabezado en azul
+  row_spec(1:nrow(variable_descriptions), background = "#F0F8FF") # Filas en un azul claro
+
 ```
 
 ```{r, include=FALSE}
-
+# Convertir las variables cualitativas a tipo carácter
+boston_data$CHAS <- as.character(boston_data$CHAS)
+boston_data$RAD <- as.character(boston_data$RAD)
+boston_data$`CAT. MEDV` <- as.character(boston_data$`CAT. MEDV`)
 ```
 ## Análisis de Vivienda
 
-### Resumen de Estadísticas Descriptivas
+```{r, include=FALSE}
+# Convertir CAT. MEDV a factor si no lo está
+boston_data$`CAT. MEDV` <- as.factor(boston_data$`CAT. MEDV`)
 
-```{r, echo=FALSE}
+# Renombrar niveles para mayor claridad
+levels(boston_data$`CAT. MEDV`) <- c("Menor_30k", "Mayor_30k")
 
+# Resumen de la tasa de delincuencia (CRIM) y el número de habitaciones (RM) por grupo
+summary_stats <- boston_data %>%
+  group_by(`CAT. MEDV`) %>%
+  summarise(
+    Promedio_CRIM = mean(CRIM, na.rm = TRUE),
+    SD_CRIM = sd(CRIM, na.rm = TRUE),
+    Promedio_RM = mean(RM, na.rm = TRUE),
+    SD_RM = sd(RM, na.rm = TRUE)
+  )
 
+summary_stats
+
+# Prueba t para CRIM
+t_test_crim <- t.test(CRIM ~ `CAT. MEDV`, data = boston_data)
+t_test_crim
+
+# Prueba t para RM
+t_test_rm <- t.test(RM ~ `CAT. MEDV`, data = boston_data)
+t_test_rm
 ```
+### Tasa de delicuencia por valor de la vivienda
+```{r}
+# Boxplot para CRIM
+ggplot(boston_data, aes(x = `CAT. MEDV`, y = CRIM, fill = `CAT. MEDV`)) +
+  geom_boxplot() +
+  labs(title = "Tasa de delincuencia por zona (CRIM) según el valor de la vivienda",
+       x = "Categoría del valor medio de la vivienda",
+       y = "Tasa de delincuencia per cápita (CRIM)") +
+  theme_minimal()
+```
+
+## Número Medio de Habitaciones por Valor de la Vivienda
+```{r}
+# Boxplot para RM
+ggplot(boston_data, aes(x = `CAT. MEDV`, y = RM, fill = `CAT. MEDV`)) +
+  geom_boxplot() +
+  labs(title = "Número medio de habitaciones (RM) según el valor de la vivienda",
+       x = "Categoría del valor medio de la vivienda",
+       y = "Número medio de habitaciones (RM)") +
+  theme_minimal()
+```
+
 ## Referencias.
  
 Por favor colocar las referencias en normas APA.  
