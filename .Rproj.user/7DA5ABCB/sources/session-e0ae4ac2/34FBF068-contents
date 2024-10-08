@@ -157,6 +157,8 @@ boxplot(DIS ~ `CAT. MEDV`, data=boston_data, main="Distancias Ponderadas a Centr
 # Crear una nueva variable categórica basada en el valor medio de las viviendas
 boston_data$`CAT. MEDV` <- ifelse(boston_data$MEDV >= 30, ">= 30k", "< 30k")
 
+boston_data$RAD <- as.numeric(boston_data$RAD)
+
 # Calcular las medias del índice de accesibilidad a carreteras radiales para cada categoría
 mean_rad_high <- mean(boston_data$RAD[boston_data$`CAT. MEDV` == ">= 30k"])
 mean_rad_low <- mean(boston_data$RAD[boston_data$`CAT. MEDV` == "< 30k"])
@@ -169,9 +171,9 @@ cat("Media del índice de accesibilidad a carreteras radiales para viviendas < 3
 t_test <- t.test(boston_data$RAD ~ boston_data$`CAT. MEDV`)
 print(t_test)
 ```
-```{r}
+``` {r}
 # Graficar el índice de accesibilidad a carreteras radiales por categoría
-boxplot(RAD ~ `CAT. MEDV`, data=boston_data_clean, 
+boxplot(RAD ~ `CAT. MEDV`, data=boston_data, 
         main="Índice de Accesibilidad a Carreteras Radiales",
         xlab="Valor Medio de la Vivienda", 
         ylab="Índice de Accesibilidad a Carreteras Radiales (RAD)", 
