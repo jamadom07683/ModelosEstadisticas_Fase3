@@ -129,6 +129,55 @@ ggplot(boston_data, aes(x = `CAT. MEDV`, y = RM, fill = `CAT. MEDV`)) +
   theme_minimal()
 ```
 
+## Distancia ponderada a cinco centros de empleo Grafico de dispersion
+```{r, include=FALSE}
+# Crear una nueva variable categórica basada en el valor medio de las viviendas
+boston_data$`CAT. MEDV` <- ifelse(boston_data$MEDV >= 30, ">= 30k", "< 30k")
+
+# Calcular las medias de las distancias ponderadas para cada categoría
+mean_dis_high <- mean(boston_data$DIS[boston_data$`CAT. MEDV` == ">= 30k"])
+mean_dis_low <- mean(boston_data$DIS[boston_data$`CAT. MEDV` == "< 30k"])
+
+# Mostrar las medias
+cat("Media de distancias ponderadas para viviendas >= 30k:", mean_dis_high, "\n")
+cat("Media de distancias ponderadas para viviendas < 30k:", mean_dis_low, "\n")
+
+# Realizar una prueba t para comparar las medias
+t_test <- t.test(boston_data$DIS ~ boston_data$`CAT. MEDV`)
+print(t_test)
+```
+```{r}
+# Graficar las distancias ponderadas por categoría
+boxplot(DIS ~ `CAT. MEDV`, data=boston_data, main="Distancias Ponderadas a Centros de Empleo",
+        xlab="Valor Medio de la Vivienda", ylab="Distancia Ponderada (DIS)", col=c("lightblue", "lightgreen"))
+```
+
+## El índice de accesibilidad a carreteras radiales.
+```{r, include=FALSE}
+# Crear una nueva variable categórica basada en el valor medio de las viviendas
+boston_data$`CAT. MEDV` <- ifelse(boston_data$MEDV >= 30, ">= 30k", "< 30k")
+
+# Calcular las medias del índice de accesibilidad a carreteras radiales para cada categoría
+mean_rad_high <- mean(boston_data$RAD[boston_data$`CAT. MEDV` == ">= 30k"])
+mean_rad_low <- mean(boston_data$RAD[boston_data$`CAT. MEDV` == "< 30k"])
+
+# Mostrar las medias
+cat("Media del índice de accesibilidad a carreteras radiales para viviendas >= 30k:", mean_rad_high, "\n")
+cat("Media del índice de accesibilidad a carreteras radiales para viviendas < 30k:", mean_rad_low, "\n")
+
+# Realizar una prueba t para comparar las medias
+t_test <- t.test(boston_data$RAD ~ boston_data$`CAT. MEDV`)
+print(t_test)
+```
+```{r}
+# Graficar el índice de accesibilidad a carreteras radiales por categoría
+boxplot(RAD ~ `CAT. MEDV`, data=boston_data_clean, 
+        main="Índice de Accesibilidad a Carreteras Radiales",
+        xlab="Valor Medio de la Vivienda", 
+        ylab="Índice de Accesibilidad a Carreteras Radiales (RAD)", 
+        col=c("lightblue", "lightgreen"))
+```
+
 ## Referencias.
  
 Por favor colocar las referencias en normas APA.  

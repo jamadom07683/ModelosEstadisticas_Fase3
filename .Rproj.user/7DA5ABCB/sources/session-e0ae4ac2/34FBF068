@@ -3,7 +3,7 @@
     "path": "~/Documents/ModelosEstadis_Fase3/plantillaF3.Rmd",
     "project_path": "plantillaF3.Rmd",
     "type": "r_markdown",
-    "hash": "0",
+    "hash": "1372158160",
     "contents": "",
     "dirty": false,
     "created": 1728136269271.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "133,7",
-        "scrollLine": "114"
+        "cursorPosition": "171,6",
+        "scrollLine": "153"
     },
     "folds": "",
-    "lastKnownWriteTime": 1728314764,
+    "lastKnownWriteTime": 1728396370,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1728314764100,
+    "last_content_update": 1728396370595,
     "read_only": false,
     "read_only_alternatives": []
 }
