@@ -16,6 +16,7 @@ library(dplyr)
 library(readxl)
 library(kableExtra)
 library(ggplot2)
+library(MASS)
 # URL actualizada del archivo en GitHub
 url <- "https://raw.githubusercontent.com/jamadom07683/ModelosEstadisticas_Fase3/main/BostonHousing.xlsx"
 # Crear un archivo temporal donde descargar el Excel
@@ -308,7 +309,29 @@ ggplot(boston_data_numeric, aes(x = predict(modelo), y = MEDV)) +
   geom_abline(slope = 1, intercept = 0, color = "red") +
   labs(x = "Predicciones", y = "Valores Reales", title = "Predicciones vs Valores Reales")
 ```
+## Datos no significativos
+```{r}
+# Ajustar el modelo de regresión lineal múltiple
+modelo <- lm(Boston$medv ~ . -Boston$medv , data = Boston)
 
+# Ver el resumen del modelo
+summary(modelo)
+```
+
+## Datos no significativos
+Dentro del análisis anterior mostrado, no son significativos las variables indus (proporción de acres comerciales no minoristas de la zona y la variable age(proporción de unidades ocupadas por el propietario y construidas antes de 1940).
+
+Los predictores que tienen un efecto negativo sobre el precio de la vivienda son aquellos que tienen un coeficiente negativo como:<p>
+<p>
+1-  CRIM: Tasa de delincuencia per cápita por zona. <p>
+2- NOX: Concentración de óxido nítrico (partes por millón). <p>
+3- DIS: Distancias ponderadas a cinco centros de empleo de Boston. <p>
+
+---
+
+4- TAX: Tasa de impuesto a la propiedad. <p>
+5- PTRATIO: Proporción alumno/profesor por zona. <p>
+6- LSTAT: Porcentaje de la población con menor estatus social. <p>
 
 ## Referencias.
  
