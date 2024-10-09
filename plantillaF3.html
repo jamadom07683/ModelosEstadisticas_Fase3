@@ -4659,6 +4659,75 @@ Los predictores que tienen un efecto negativo sobre el precio de la vivienda son
 
 <p>
 
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article >
+
+<h3>Punto 8.</h3>
+
+<pre >## 
+## Call:
+## lm(formula = medv ~ crim + zn + chas + nox + rm + dis + rad + 
+##     tax + ptratio + lstat, data = Boston)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -15.1814  -2.7625  -0.6243   1.8448  26.3920 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  41.451747   4.903283   8.454 3.18e-16 ***
+## crim         -0.121665   0.032919  -3.696 0.000244 ***
+## zn            0.046191   0.013673   3.378 0.000787 ***
+## chas          2.871873   0.862591   3.329 0.000935 ***
+## nox         -18.262427   3.565247  -5.122 4.33e-07 ***
+## rm            3.672957   0.409127   8.978  &lt; 2e-16 ***
+## dis          -1.515951   0.187675  -8.078 5.08e-15 ***
+## rad           0.283932   0.063945   4.440 1.11e-05 ***
+## tax          -0.012292   0.003407  -3.608 0.000340 ***
+## ptratio      -0.930961   0.130423  -7.138 3.39e-12 ***
+## lstat        -0.546509   0.047442 -11.519  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 4.789 on 495 degrees of freedom
+## Multiple R-squared:  0.7342, Adjusted R-squared:  0.7289 
+## F-statistic: 136.8 on 10 and 495 DF,  p-value: &lt; 2.2e-16</pre>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article >
+
+<pre >##  [1] &quot;(Intercept)&quot; &quot;crim&quot;        &quot;zn&quot;          &quot;chas&quot;        &quot;nox&quot;        
+##  [6] &quot;rm&quot;          &quot;dis&quot;         &quot;rad&quot;         &quot;tax&quot;         &quot;ptratio&quot;    
+## [11] &quot;lstat&quot;</pre>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article >
+
+<h3>Usar la función predict para pronosticcar el valor medio de un inmueble con las siguientes características:</h3>
+
+<p><strong>CRIM=0.0064, ZN=12, INDUS=2.34, CHAS=0, NOX=0.538, RM=6.575, AGE=70, DIS=4.09, RAD=1, TAX=297, PTRATIO=16.3, LSTAT=4.98</strong></p>
+
+<pre >##       1 
+## 28.8666</pre>
+
+<pre >##       fit      lwr      upr
+## 1 28.8666 19.41635 38.31686</pre>
+
+</article></slide><slide class=""><hgroup><h2>Conclusiones</h2></hgroup><article  id="conclusiones">
+
+<p><strong>1. Impacto de los predictores significativos:</strong></p>
+
+<p>Las variables seleccionadas en el modelo final tienen un impacto significativo en el precio medio de la vivienda. Cada uno de estas variables afectan de manera importante el valor del inmueble, bien sea de forma positiva o negativa. El número de habitaciones promedio tiene un efecto positivo, mientras que variables como el índice de delincuencia (crim), la concentración de óxido nítrico, las distancias a centros de empleo, la tasa de impuesto a la propiedad, la proporción de alumnos por profesor en la zona o el porcentaje de población de clase baja tienen un impacto negativo.</p>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article >
+
+<p><strong>2. Precisión del pronóstico con intervalo de predicción:</strong></p>
+
+<p>Al realizar el pronóstico para un nuevo inmueble, el modelo proporciona no solo un valor estimado, sino también un intervalo de predicción al 95%. Esto permite evaluar la confiabilidad de la predicción. El intervalo de predicción proporciona un rango donde podría caer el precio estimado con una alta probabilidad. Este enfoque añade robustez a la toma de decisiones.</p>
+
+<p>El modelo es capaz de identificar los factores que más influyen en el precio de las viviendas y, a través del intervalo de predicción, proveer un marco de incertidumbre razonable sobre el valor estimado de un inmueble.</p>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article >
+
+<p><strong>3. Para el caso bajo estudio con los parámetros dados se estima que el valor de la vivienda con una tasa de crimen menor al 1% y una distancia de 4.09 millas a los centros de trabajo, entre otras variables, nos cuenta que esta entre 19416,35 con un máximo de 38316,86 y un valor medio de 28866,6 dólares</strong></p>
+
 </article></slide><slide class=""><hgroup><h2>Referencias.</h2></hgroup><article  id="referencias.">
 
 <ul>

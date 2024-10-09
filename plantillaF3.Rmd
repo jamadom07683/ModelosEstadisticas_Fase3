@@ -333,6 +333,91 @@ Los predictores que tienen un efecto negativo sobre el precio de la vivienda son
 5- PTRATIO: Proporción alumno/profesor por zona. <p>
 6- LSTAT: Porcentaje de la población con menor estatus social. <p>
 
+---
+
+### Punto 8.
+
+```{r}
+# Ajustar el modelo de regresión lineal múltiple
+#modelo <- lm(Boston$medv ~ . -Boston$medv -Boston$indus -Boston$age, data = Boston)
+
+modelo_significativo <- lm(medv ~ crim + zn + chas + nox + rm + dis + rad + tax + ptratio +  lstat, data = Boston)
+
+# Ver el resumen del modelo
+summary(modelo_significativo)
+```
+
+---
+```{r}
+names(modelo_significativo$coefficients)
+```
+
+---
+
+###  Usar la función predict para pronosticcar el valor medio de un inmueble con las siguientes características:
+
+**CRIM=0.0064, ZN=12, INDUS=2.34, CHAS=0, NOX=0.538, RM=6.575, AGE=70, DIS=4.09, RAD=1, TAX=297, PTRATIO=16.3, LSTAT=4.98**
+
+```{r}
+inmueble <- data.frame(  
+  crim = 0.0064,
+  zn   = 12,
+  chas = 0,
+  nox  = 0.538,
+  rm   = 6.575,
+  dis  = 4.09,
+  rad  = 1,
+  tax  = 297,
+  ptratio = 16.3,
+  lstat = 4.98
+)
+
+# Usar el modelo para predecir el valor medio del inmueble
+prediccion <- predict(modelo_significativo, newdata = inmueble)
+
+# Mostrar la predicción
+prediccion
+```
+
+```{r}
+inmueble <- data.frame(  
+  crim = 0.0064,
+  zn   = 12,
+  chas = 0,
+  nox  = 0.538,
+  rm   = 6.575,
+  dis  = 4.09,
+  rad  = 1,
+  tax  = 297,
+  ptratio = 16.3,
+  lstat = 4.98
+)
+
+# Usar el modelo para predecir el valor medio del inmueble
+prediccion <- predict(modelo_significativo, newdata = inmueble, interval = "prediction")
+
+# Mostrar la predicción
+prediccion
+```
+
+##  Conclusiones
+
+**1. Impacto de los predictores significativos:**
+
+Las variables seleccionadas en el modelo final tienen un impacto significativo en el precio medio de la vivienda. Cada uno de estas variables afectan de manera importante el valor del inmueble, bien sea de forma positiva o negativa. El número de habitaciones promedio tiene un efecto positivo, mientras que variables como el índice de delincuencia (crim), la concentración de óxido nítrico, las distancias a centros de empleo, la tasa de impuesto a la propiedad, la proporción de alumnos por profesor en la zona o el porcentaje de población de clase baja tienen un impacto negativo.
+
+---
+
+**2. Precisión del pronóstico con intervalo de predicción:**
+
+Al realizar el pronóstico para un nuevo inmueble, el modelo proporciona no solo un valor estimado, sino también un intervalo de predicción al 95%. Esto permite evaluar la confiabilidad de la predicción. El intervalo de predicción proporciona un rango donde podría caer el precio estimado con una alta probabilidad. Este enfoque añade robustez a la toma de decisiones.
+
+El modelo es capaz de identificar los factores que más influyen en el precio de las viviendas y, a través del intervalo de predicción, proveer un marco de incertidumbre razonable sobre el valor estimado de un inmueble.
+
+---
+
+**3. Para el caso bajo estudio  con los parámetros dados se estima que el valor de la vivienda con una tasa de crimen menor al 1% y una distancia de 4.09 millas a los centros de trabajo, entre otras variables, nos cuenta que esta entre 19416,35 con un máximo de 38316,86 y un valor medio de 28866,6 dólares**
+
 ## Referencias.
  
 - U.S. Census Bureau. *Boston Housing Dataset*. Recuperado de https://www.census.gov/data.html
