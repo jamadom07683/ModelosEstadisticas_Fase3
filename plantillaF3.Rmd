@@ -180,10 +180,137 @@ boxplot(RAD ~ `CAT. MEDV`, data=boston_data,
         col=c("lightblue", "lightgreen"))
 ```
 
+## Descripción de la hipótesis
+
+*La hipótesis nula* es una afirmación que se asume verdadera hasta que se demuestre lo contrario. 
+- Es el punto de partida para cualquier prueba de hipótesis y generalmente representa una situación de “no efecto” o “no diferencia”. 
+- En el contexto del ejemplo, la hipótesis nula es: *H0:μ=71*
+- Esto significa que asumimos que la media de la proporción de unidades ocupadas por el propietario y construidas antes de 1940 es igual a 71.
+
+*La hipótesis alternativa* es la afirmación que queremos probar. Representa una situación de “efecto” o “diferencia”. 
+- En el contexto del ejemplo, la hipótesis alternativa es: *H1:μ≠71*
+- Esto significa que estamos probando si la media de la proporción de unidades ocupadas por el propietario y construidas antes de 1940 es diferente de 71.
+
+*Nivel de significancia del 5%*
+
+---
+
+## Resultados de la Prueba t
+
+```{r}
+# Realizar la prueba t
+edades <- boston_data$AGE
+
+resultado <- t.test(edades, alternative = "two.sided", mu = 71, conf.level = 0.95)
+
+# Datos del análisis
+t_value <- resultado$statistic
+df <- resultado$parameter
+p_value <- resultado$p.value
+conf_int <- resultado$conf.int
+mean_x <- mean(edades)
+
+# Imprimir resultados
+cat("Resultados del análisis:\n")
+cat("t =", t_value, ", df =", df, ", p-value =", p_value, "\n")
+cat("Hipótesis alternativa: la media verdadera no es igual a 71\n")
+cat("Intervalo de confianza del 95%:\n")
+cat(conf_int[1], conf_int[2], "\n")
+cat("Estimación de la media de x:\n")
+cat(mean_x, "\n")
+```
+
+## Interpretación del Resultado de la Prueba t (1/3)
+
+**Estadístico t** (t = -1.938):
+
+Este valor indica cuántas desviaciones estándar está la media de la muestra del valor hipotético de la media (71). Un valor t negativo sugiere que la media de la muestra es menor que 71.
+
+**Grados de libertad** (df = 505):
+
+Los grados de libertad están relacionados con el tamaño de la muestra y afectan la forma de la distribución t. En este caso, tienes 506 observaciones (n-1).
+
+**Valor p** (p-value = 0.05319):
+
+El valor p indica la probabilidad de obtener un resultado tan extremo como el observado, bajo la suposición de que la hipótesis nula es verdadera.
+
+---
+
+## Interpretación del Resultado de la Prueba t (2/3)
+
+**Interpretación:**
+
+- Si el valor *p* < 0.05, rechazas la hipótesis nula.  
+- Si el valor *p* ≥ 0.05, no rechazas la hipótesis nula.
+
+En este caso, el valor p es 0.05319, que es ligeramente mayor que 0.05. Por lo tanto, no rechazas la hipótesis nula. No tienes suficiente evidencia para afirmar que la media de la proporción de unidades ocupadas por el propietario y construidas antes de 1940 es diferente de 71.
+
+**Intervalo de confianza** (95%: 66.11637, 71.03343):
+
+Este intervalo proporciona un rango dentro del cual se espera que se encuentre la verdadera media de la población con un 95% de confianza.  
+Dado que 71 está dentro de este intervalo, esto respalda la decisión de no rechazar la hipótesis nula.
+
+---
+
+## Interpretación del Resultado de la Prueba t (3/3)
+
+**Media de la muestra** (mean of x = 68.5749):
+
+La media de los datos de la muestra es aproximadamente 68.57.
+
+**Conclusión:**
+
+Dado que el valor *p* es ligeramente mayor que *0.05* y el intervalo de confianza incluye 71, no tienes suficiente evidencia para rechazar la hipótesis nula. Esto significa que no puedes concluir que la media de la proporción de unidades ocupadas por el propietario y construidas antes de 1940 sea diferente de 71.
+
+## Predicciones
+```{r}
+#Exploración de datos
+boston_data_numeric <- boston_data[sapply(boston_data, is.numeric)]
+
+summary(boston_data_numeric)
+pairs(boston_data_numeric)
+
+#Ajuste del modelo
+modelo <- lm(MEDV ~ ., data = boston_data_numeric)
+
+# Evaluación del modelo
+summary(modelo)
+
+# Visualización de resultados
+par(mfrow = c(2, 2))
+plot(modelo)
+
+# Nuevos datos
+nuevos_datos <- data.frame(
+  CRIM = c(0.1, 0.2),
+  ZN = c(18, 0),
+  INDUS = c(2.31, 7.07),
+  CHAS = c(0, 0),
+  NOX = c(0.538, 0.469),
+  RM = c(6.575, 6.421),
+  AGE = c(65.2, 78.9),
+  DIS = c(4.09, 4.9671),
+  RAD = c(1, 2),
+  TAX = c(296, 242),
+  PTRATIO = c(15.3, 17.8),
+  LSTAT = c(4.98, 9.14)
+)
+
+# Predicción
+predicciones <- predict(modelo, nuevos_datos)
+print(predicciones)
+
+# Gráfico de predicciones vs valores reales
+library(ggplot2)
+
+ggplot(boston_data_numeric, aes(x = predict(modelo), y = MEDV)) +
+  geom_point() +
+  geom_abline(slope = 1, intercept = 0, color = "red") +
+  labs(x = "Predicciones", y = "Valores Reales", title = "Predicciones vs Valores Reales")
+```
+
+
 ## Referencias.
  
-Por favor colocar las referencias en normas APA.  
-
-+ Referencia 1
-+ Referencia 2.
+- U.S. Census Bureau. *Boston Housing Dataset*. Recuperado de https://www.census.gov/data.html
  
