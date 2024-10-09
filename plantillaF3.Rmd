@@ -241,12 +241,12 @@ El valor p indica la probabilidad de obtener un resultado tan extremo como el ob
 
 ### Interpretación del Resultado de la Prueba t (2/3)
 
-- Si el valor *p* < 0.05, rechazas la hipótesis nula.  
-- Si el valor *p* ≥ 0.05, no rechazas la hipótesis nula.
+•⁠  ⁠Si el valor p < 0.05, rechazas la hipótesis nula.  
+•⁠  ⁠Si el valor p ≥ 0.05, no rechazas la hipótesis nula.
 
-En este caso, el valor p es 0.05319, que es ligeramente mayor que 0.05. Por lo tanto, no rechazas la hipótesis nula. No tienes suficiente evidencia para afirmar que la media de la proporción de unidades ocupadas por el propietario y construidas antes de 1940 es diferente de 71.
+En este caso, el valor p es 0.05319, que es ligeramente mayor que 0.05. Por lo tanto, no se rechaza la hipótesis nula. No se tiene suficiente evidencia para afirmar que la media de la proporción de unidades ocupadas por el propietario y construidas antes de 1940 es diferente de 71.
 
-**Intervalo de confianza** (95%: 66.11637, 71.03343):
+*Intervalo de confianza* (95%: 66.11637, 71.03343):
 
 Este intervalo proporciona un rango dentro del cual se espera que se encuentre la verdadera media de la población con un 95% de confianza.  
 Dado que 71 está dentro de este intervalo, esto respalda la decisión de no rechazar la hipótesis nula.
@@ -255,13 +255,13 @@ Dado que 71 está dentro de este intervalo, esto respalda la decisión de no rec
 
 ### Interpretación del Resultado de la Prueba t (3/3)
 
-**Media de la muestra** (mean of x = 68.5749):
+*Media de la muestra* (mean of x = 68.5749):
 
 La media de los datos de la muestra es aproximadamente 68.57.
 
-**Conclusión:**
+*Conclusión:*
 
-Dado que el valor *p* es ligeramente mayor que *0.05* y el intervalo de confianza incluye 71, no tienes suficiente evidencia para rechazar la hipótesis nula. Esto significa que no puedes concluir que la media de la proporción de unidades ocupadas por el propietario y construidas antes de 1940 sea diferente de 71.
+Dado que el valor p es ligeramente mayor que 0.05 y el intervalo de confianza incluye 71, no se tiene suficiente evidencia para rechazar la hipótesis nula. Esto significa que no se puedes concluir que la media de la proporción de unidades ocupadas por el propietario y construidas antes de 1940 sea diferente de 71.
 
 ## Predicciones
 ```{r}
