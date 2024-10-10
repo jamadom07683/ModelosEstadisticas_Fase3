@@ -335,7 +335,7 @@ Los predictores que tienen un efecto negativo sobre el precio de la vivienda son
 
 ---
 
-### Punto 8.
+## Punto 8.
 
 ```{r}
 # Ajustar el modelo de regresión lineal múltiple
