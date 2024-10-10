@@ -8,7 +8,7 @@ author:
 - Modelos Estadísticos Aplicados
 
 date: "6/Oct/2024"
-output: ioslides_presentation
+output: html_document
 ---
 ```{r setup, include=FALSE}
 library(knitr)
